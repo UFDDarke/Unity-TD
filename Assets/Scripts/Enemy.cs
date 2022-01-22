@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public string name;
+    public string enemyName;
     public float health;
     public float healthMax;
 
@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
         EnemyManager.enemyCount++;
         EnemyManager.enemies.Add(this.gameObject);
 
-        name = name_;
+        enemyName = name_;
         health = health_;
         healthMax = health_;
         this.gameObject.transform.position = pos_;
