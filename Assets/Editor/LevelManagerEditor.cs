@@ -7,9 +7,6 @@ using UnityEditor;
 public class LevelManagerEditor : Editor
 {
 
-
-
-
     public override void OnInspectorGUI()
     {
         //base.OnInspectorGUI();
@@ -19,7 +16,7 @@ public class LevelManagerEditor : Editor
         FrontEndEditor frontEnd = (FrontEndEditor)target;
         if(GUILayout.Button("Init Level"))
         {
-            LevelManager.Start();
+            frontEnd.Sync();
             //Debug.Log("The map is " + LevelManager.length + "x" + LevelManager.height);
         }
 
@@ -30,9 +27,11 @@ public class LevelManagerEditor : Editor
             Enemy newEnemy = EnemyManager.createEnemy("test", 1);
         }
 
-        if(DrawDefaultInspector() && frontEnd.autoUpdate)
+
+        if (DrawDefaultInspector() && frontEnd.autoUpdate)
         {
             frontEnd.Sync();
         }
+
     }
 }

@@ -6,6 +6,7 @@ public class FrontEndEditor : MonoBehaviour
 {
     public GameObject tilePrefab;
     public GameObject tileParent;
+    public GameObject enemyPrefab;
     //public List<GameObject> tiles = new List<GameObject>();
     //public List<GameObject> path = new List<GameObject>();
     public Material buildableMaterial;
@@ -13,11 +14,12 @@ public class FrontEndEditor : MonoBehaviour
     public Material roadMaterial;
     public Camera levelCam;
 
-    public int length;
-    public int height;
+    [Range(2, 20)]
+    public int length = 18;
+    [Range(2, 14)]
+    public int height = 9;
 
     public bool autoUpdate;
-    public bool autoGenerate;
 
     public void Awake()
     {
@@ -35,12 +37,11 @@ public class FrontEndEditor : MonoBehaviour
         LevelManager.levelCam = levelCam;
         LevelManager.length = length;
         LevelManager.height = height;
+        EnemyManager.enemyPrefab = enemyPrefab;
 
-        if(autoGenerate)
-        {
-            LevelManager.Reset();
-            LevelManager.Start();
-        }
+        EnemyManager.Reset();
+        LevelManager.Reset();
+        LevelManager.Start();
 
     }
 }
