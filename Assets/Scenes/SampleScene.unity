@@ -410,7 +410,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 971682482}
-  - component: {fileID: 971682483}
   m_Layer: 0
   m_Name: Level
   m_TagString: Untagged
@@ -435,27 +434,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &971682483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971682481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a563075b953b1943928e1a3bf95513d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tilePrefab: {fileID: 6347016454976994422, guid: 02ea9414003911745814520321ab6023, type: 3}
-  tileParent: {fileID: 884319785}
-  tiles: []
-  path: []
-  buildableMaterial: {fileID: 2100000, guid: c13133134a3368240b4f8c5ceebdbe11, type: 2}
-  emptyMaterial: {fileID: 2100000, guid: 9ab2d7edd6e6ca343b7b48d45788193c, type: 2}
-  roadMaterial: {fileID: 2100000, guid: 71b1a576fa3fcae4fb9718597a5479f4, type: 2}
-  levelCam: {fileID: 519420031}
-  length: 16
-  height: 8
-  startTile: {fileID: 0}
-  endTile: {fileID: 0}

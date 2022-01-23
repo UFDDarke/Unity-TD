@@ -20,34 +20,36 @@ enum TileType
     END
 }
 
-public class LevelManager : MonoBehaviour
+// TODO: Convert into a static class (we don't need to instantiate this + would be nice to access from anywhere)
+public static class LevelManager
 {
-    public GameObject tilePrefab;
-    public GameObject tileParent;
-    public List<GameObject> tiles = new List<GameObject>();
-    public List<GameObject> path = new List<GameObject>();
-    public Material buildableMaterial;
-    public Material emptyMaterial;
-    public Material roadMaterial;
-    public Camera levelCam;
+    public static GameObject tilePrefab;
+    public static GameObject tileParent;
+    public static List<GameObject> tiles = new List<GameObject>();
+    public static List<GameObject> path = new List<GameObject>();
+    public static Material buildableMaterial;
+    public static Material emptyMaterial;
+    public static Material roadMaterial;
+    public static Camera levelCam;
 
     // Start is called before the first frame update
 
-    public int length;
-    public int height;
+    public static int length;
+    public static int height;
 
-    public GameObject startTile;
-    public GameObject endTile;
+    public static GameObject startTile;
+    public static GameObject endTile;
 
-    void Start()
+    public static void Start()
     {
+        Debug.Log("Test!");
         #region Create Tiles
         for (int l = 0; l < length; l++)
         {
             for (int h = 0; h < height; h++)
             {
                 //GameObject newTile = Instantiate(tilePrefab, new Vector3(l - (length / 2), h - (height / 2), 10.0f), transform.rotation);
-                GameObject newTile = Instantiate(tilePrefab, new Vector3(l, h, 10.0f), transform.rotation);
+                GameObject newTile = Transform.Instantiate(tilePrefab, new Vector3(l, h, 10.0f), Quaternion.identity);
                 tiles.Add(newTile);
                 newTile.transform.parent = tileParent.transform;
                 //newTile.GetComponent<TileScript>().x = l + 1;
@@ -133,21 +135,27 @@ public class LevelManager : MonoBehaviour
             }
         }
         #endregion
+    }
 
-
-
+    public static void Reset()
+    {
+        foreach(GameObject tile in tiles)
+        {
+            UnityEngine.Object.Destroy(tile);
+        }
+        tiles.Clear();
+        path.Clear();
 
     }
-    
-    
+
     // Update is called once per frame
-    void Update()
+    static void Update()
     {
         
     }
 
 
-    GameObject getTileAtCoordinate(int x, int y)
+    static GameObject getTileAtCoordinate(int x, int y)
     {
         // To get X:1 Y:0
         // The tile index is 9
@@ -156,7 +164,7 @@ public class LevelManager : MonoBehaviour
         return tiles[(x * height) + y];
     }
 
-    GameObject getTileInDirection(GameObject initial, Direction direct)
+    static GameObject getTileInDirection(GameObject initial, Direction direct)
     {
         Vector2 pos = initial.GetComponent<TileScript>().pos;
         Vector2 newPos = pos;
