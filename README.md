@@ -10,6 +10,14 @@ The next thing that should be done is implementing a pathfinding AI that can rea
 		Add basic main menu with which to start the game.
 		Create a unity editor script to create enemies.
 
+		1/23/2022
+		Yesterday I finished the TODOs, as well as basic enemy movement too.
+		Don't really know what to do today besides implementing basic tower logic.
+		TODO for today:
+		Implement basic tower logic
+		Maybe start implementing the UI, so that we can create towers
+
+
 
 	TODO:
 implement basic unit object (literally just a sphere)

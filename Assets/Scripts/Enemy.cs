@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+// TODO:
+// Visual effect on enemy damage
+
+
 
 public class Enemy : MonoBehaviour
 {
@@ -26,6 +30,21 @@ public class Enemy : MonoBehaviour
         StartCoroutine(movementTest());
     }
 
+    public void takeDamage(float damage)
+	{
+        health -= damage;
+        if(health <= 0)
+		{
+            Cleanup();
+		}
+	}
+
+    public void Cleanup()
+	{
+        Destroy(obj);
+	}
+
+
     public IEnumerator movementTest()
     {
         Transform target = LevelManager.path[0].transform;
@@ -47,6 +66,7 @@ public class Enemy : MonoBehaviour
         }
 
         print("we out here");
+        Cleanup();
 
         yield return new WaitForSeconds(3f);
     }
