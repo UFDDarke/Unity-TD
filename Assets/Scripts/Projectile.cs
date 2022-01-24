@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     float damage;
     static float BASERADIUS = 0.1f; // how far from the target to count as a hit
     GameObject obj; // the object that Projectile.cs is attached to
-    
+    Vector3 attackLocation; // for non-homing attacks and unparented attacks (last position of target)
 
     public void Init(Tower owner_, Enemy target_, float speed_, float damage_)
     {
@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
         damage = damage_;
         obj = this.gameObject;
 
-
+        attackLocation = target.transform.position;
         StartCoroutine(projectileMovement());
     }
 
@@ -36,15 +36,22 @@ public class Projectile : MonoBehaviour
 
     public IEnumerator projectileMovement()
     {
-        // TODO: Projectiles don't disappear when enemy dies, instead they travel to the last position and are destroyed
-        while (target != null && Vector3.Distance(obj.transform.position, target.transform.position) > BASERADIUS)
+        // Projectiles currently are not destroyed when their target dies, and instead travel to their target's last location.
+        // Considering adding collision to these orphaned projectiles so that they can damage other enemies (prolly not tho)
+        while ((target != null || attackLocation != null) && Vector3.Distance(obj.transform.position, attackLocation) > BASERADIUS)
         {
-            obj.transform.position = Vector3.MoveTowards(obj.transform.position, target.gameObject.transform.position, speed * Time.deltaTime);
+            obj.transform.position = Vector3.MoveTowards(obj.transform.position, attackLocation, speed * Time.deltaTime);
 
-            Vector3 direction = target.gameObject.transform.position - obj.transform.position;
+            Vector3 direction = attackLocation - obj.transform.position;
             Quaternion rotation = Quaternion.LookRotation(direction);
 
             obj.transform.rotation = rotation;
+            
+            if(target != null)
+			{
+                attackLocation = target.gameObject.transform.position;
+			}
+
             yield return null;
         }
 
