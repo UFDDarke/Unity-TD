@@ -40,6 +40,8 @@ public static class LevelManager
     public static GameObject startTile;
     public static GameObject endTile;
 
+    public static List<GameObject> towers;
+
     public static void Start()
     {
         Debug.Log("Test!");
@@ -153,6 +155,12 @@ public static class LevelManager
     {
         
     }
+
+    public static void CreateTower(GameObject tile, GameObject prefab)
+	{
+        // Creates a tower of type 'prefab' at given 'tile'
+	}
+
 
 
     static GameObject getTileAtCoordinate(int x, int y)
