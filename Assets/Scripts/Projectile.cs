@@ -41,6 +41,10 @@ public class Projectile : MonoBehaviour
         {
             obj.transform.position = Vector3.MoveTowards(obj.transform.position, target.gameObject.transform.position, speed * Time.deltaTime);
 
+            Vector3 direction = target.gameObject.transform.position - obj.transform.position;
+            Quaternion rotation = Quaternion.LookRotation(direction);
+
+            obj.transform.rotation = rotation;
             yield return null;
         }
 
