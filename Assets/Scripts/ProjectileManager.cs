@@ -10,9 +10,9 @@ public static class ProjectileManager
 	{
 		GameObject newObj = UnityEngine.Object.Instantiate(tower.prefab);
 		Projectile newProjectile = newObj.GetComponent<Projectile>();
-		newProjectile.Init(tower, target, tower.projectileSpeed, tower.damage);
 		newObj.transform.parent = tower.transform;
-		newObj.transform.position = tower.obj.transform.position + (Vector3.forward * 2);
+		newObj.transform.position = tower.obj.transform.position + tower.projectileOffset;
+		newProjectile.Init(tower, target, tower.projectileSpeed, tower.damage);
 	}
 
 

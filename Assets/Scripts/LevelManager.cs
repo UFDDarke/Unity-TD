@@ -51,7 +51,7 @@ public static class LevelManager
             for (int h = 0; h < height; h++)
             {
                 //GameObject newTile = Instantiate(tilePrefab, new Vector3(l - (length / 2), h - (height / 2), 10.0f), transform.rotation);
-                GameObject newTile = Transform.Instantiate(tilePrefab, new Vector3(l, h, 10.0f), Quaternion.identity);
+                GameObject newTile = Transform.Instantiate(tilePrefab, new Vector3(l, h, 0.0f), Quaternion.identity);
                 tiles.Add(newTile);
                 newTile.transform.parent = tileParent.transform;
                 //newTile.GetComponent<TileScript>().x = l + 1;
@@ -99,7 +99,7 @@ public static class LevelManager
 
         #region Camera Position
         // Position camera
-        levelCam.transform.position = new Vector3(length / 2.0f, height / 2.0f);
+        levelCam.transform.position = new Vector3(length / 2.0f, height / 2.0f, -10.0f);
         #endregion
 
         #region Cosmetic

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class UserControl : MonoBehaviour
 {
+    public GameObject towerPrefab;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -20,6 +23,7 @@ public class UserControl : MonoBehaviour
                 if(obj.GetComponent<TileScript>() != null)
 				{
                     print("Clicked on a tile at X" + obj.GetComponent<TileScript>().pos.x + " Y" + obj.GetComponent<TileScript>().pos.y);
+                    Tower newTower = TowerManager.CreateTower(obj.transform.position, towerPrefab);
 				}
 			}
 		}
