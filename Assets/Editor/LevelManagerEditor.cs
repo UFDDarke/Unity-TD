@@ -14,21 +14,21 @@ public class LevelManagerEditor : Editor
 
         //LevelManager level = (LevelManager)target;
         FrontEndEditor frontEnd = (FrontEndEditor)target;
-        if(GUILayout.Button("Init Level"))
+        if(GUILayout.Button("Init Level") && Application.isPlaying)
         {
             frontEnd.Sync();
             //Debug.Log("The map is " + LevelManager.length + "x" + LevelManager.height);
         }
 
 
-        if(GUILayout.Button("Create Enemy"))
+        if(GUILayout.Button("Create Enemy") && Application.isPlaying)
         {
             // Create an enemy
             Enemy newEnemy = EnemyManager.createEnemy("test", 1);
         }
 
 
-        if (DrawDefaultInspector() && frontEnd.autoUpdate)
+        if (DrawDefaultInspector() && frontEnd.autoUpdate && Application.isPlaying)
         {
             frontEnd.Sync();
         }
