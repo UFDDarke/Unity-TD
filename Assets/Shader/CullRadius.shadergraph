@@ -92,20 +92,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "1ec449abff154bf8904a548168dbdb46"
-                },
-                "m_SlotId": 3
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "8fc265ad57f345e1918301bd5f543fe9"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "50eb55c28e9d47f0967ab5308e7bb279"
                 },
                 "m_SlotId": 0
@@ -154,23 +140,9 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "1ec449abff154bf8904a548168dbdb46"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "a75dea9f89fb41b4a91704ec133f5b27"
-                },
-                "m_SlotId": 3
-            },
-            "m_InputSlot": {
-                "m_Node": {
                     "m_Id": "8fc265ad57f345e1918301bd5f543fe9"
                 },
-                "m_SlotId": 0
+                "m_SlotId": 1
             }
         },
         {
@@ -182,7 +154,7 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "a75dea9f89fb41b4a91704ec133f5b27"
+                    "m_Id": "8fc265ad57f345e1918301bd5f543fe9"
                 },
                 "m_SlotId": 0
             }
@@ -249,7 +221,7 @@
     },
     "m_PreviewData": {
         "serializedMesh": {
-            "m_SerializedMesh": "{\"mesh\":{\"fileID\":10210,\"guid\":\"0000000000000000e000000000000000\",\"type\":0}}",
+            "m_SerializedMesh": "{\"mesh\":{\"fileID\":10202,\"guid\":\"0000000000000000e000000000000000\",\"type\":0}}",
             "m_Guid": ""
         }
     },
@@ -454,8 +426,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -701.0,
-            "y": 601.0,
+            "x": -680.9999389648438,
+            "y": 724.0,
             "width": 208.0,
             "height": 350.0
         }
@@ -1115,8 +1087,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -701.0000610351563,
-            "y": 239.0,
+            "x": -693.0,
+            "y": -103.00000762939453,
             "width": 208.0,
             "height": 350.0
         }
