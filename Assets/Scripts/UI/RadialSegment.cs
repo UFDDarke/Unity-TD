@@ -44,6 +44,7 @@ public class RadialSegment : MonoBehaviour
 	public void Awake()
 	{
 		image = this.gameObject.GetComponent<Image>();
+		image.color = normal;
 		setInactive();
 	}
 }

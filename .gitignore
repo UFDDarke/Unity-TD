@@ -142,3 +142,8 @@ PackageBackups/
 
 # UWP builds
 /UWP/*
+
+# DORKWIGHT
+
+# Ignoring Asset folder
+Assets/Textures

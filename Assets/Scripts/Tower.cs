@@ -13,7 +13,6 @@ public class Tower : MonoBehaviour
 
     public GameObject prefab; // Which projectile prefab the tower will use
     public Vector3 projectileOffset; // UNUSED; to be used to determine a projectile's starting point
-
 	// TODO: Use Coroutine for the tower loop
 
 	public void Awake()

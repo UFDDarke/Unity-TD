@@ -51,7 +51,7 @@ public class RadialMenuManager : MonoBehaviour
 
         // Find mouse distance from center
         float distance = Vector3.Distance(new Vector3(Input.mousePosition.x, Input.mousePosition.y), new Vector3(Screen.width / 2f, Screen.height / 2f));
-        Debug.Log(distance);
+        //Debug.Log(distance);
 
 
         if(menu.activeInHierarchy)
@@ -96,6 +96,6 @@ public class RadialMenuManager : MonoBehaviour
 
 	private void Awake()
 	{
-        activate(7);
+        activate(5);
 	}
 }

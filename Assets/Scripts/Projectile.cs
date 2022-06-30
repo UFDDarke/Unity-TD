@@ -12,6 +12,11 @@ public class Projectile : MonoBehaviour
     GameObject obj; // the object that Projectile.cs is attached to
     Vector3 attackLocation; // for non-homing attacks and unparented attacks (last position of target)
 
+    // TODO: Projectiles have a lifetime. If orphaned, they will continue flying in a direction until their lifetime is over.
+    // TODO: Enemy exclusion list. For use with multi-hit attacks that should not be able to hit the same target.
+
+
+
     public void Init(Tower owner_, Enemy target_, float speed_, float damage_)
     {
         owner = owner_;

@@ -104,6 +104,7 @@ public static class LevelManager
 
         #region Cosmetic
         // COSMETIC: Tiles snap together if they are of the same type
+        /*
         foreach (GameObject tile in tiles)
         {
             // TODO: instead of each direction individually, do a foreach direction
@@ -135,7 +136,7 @@ public static class LevelManager
                 tile.transform.localScale += new Vector3(0.1f, 0);
                 tile.transform.position -= new Vector3(0.045f, 0);
             }
-        }
+        }*/
         #endregion
     }
 

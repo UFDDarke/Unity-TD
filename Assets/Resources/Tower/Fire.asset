@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8af709ec5eef2f0479f9a3cce0a0ec3d, type: 3}
-  m_Name: Basic
+  m_Name: Fire
   m_EditorClassIdentifier: 
-  name: Basic
-  description: Basic watchtower with an archer on guard.
-  cost: 15
-  damage: 3
-  range: 8
-  atkSpeed: 1
-  projectileSpeed: 8
+  name: New Tower
+  description: Tower description here
+  icon: {fileID: 0}
+  cost: 0
+  damage: 0
+  range: 0
+  atkSpeed: 0
+  projectileSpeed: 0
   prefab: {fileID: 0}
   projectileOffset: {x: 0, y: 0, z: 0}
   scripts: []
