@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Tower Defense/New Tower")]
@@ -21,4 +22,11 @@ public class TowerData : ScriptableObject
     [Header("Place tower-specific scripts in this list")]
     public List<Tower> scripts; // place tower-specific scripts in this list, which will override Tower.cs to implement specialized functionality
 
+    public string GetTooltipInfo()
+    {
+        StringBuilder builder = new StringBuilder();
+
+        builder.Append("Attack: " + (damage / atkSpeed) + " dps, Physical, " + range + " range").AppendLine();
+        return builder.ToString();
+    }
 }

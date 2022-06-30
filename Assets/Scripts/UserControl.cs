@@ -5,7 +5,7 @@ using UnityEngine;
 public class UserControl : MonoBehaviour
 {
     public GameObject towerPrefab;
-
+    public BuildMenu buildMenu;
 
     // Update is called once per frame
     void Update()
@@ -23,9 +23,18 @@ public class UserControl : MonoBehaviour
                 if(obj.GetComponent<TileScript>() != null)
 				{
                     print("Clicked on a tile at X" + obj.GetComponent<TileScript>().pos.x + " Y" + obj.GetComponent<TileScript>().pos.y);
-                    Tower newTower = TowerManager.CreateTower(obj.transform.position, towerPrefab);
+
+                    buildMenu.clickedTIle = obj.GetComponent<TileScript>();
+                    buildMenu.ShowMenu();
+
+                    //Tower newTower = TowerManager.CreateTower(obj.transform.position, towerPrefab);
 				}
-			}
-		}
+            }
+            else
+            {
+                // Didn't click on anything, so hide the build menu
+                buildMenu.HideMenu();
+            }
+        }
     }
 }
