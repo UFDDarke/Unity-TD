@@ -13,12 +13,23 @@ public class Tower : MonoBehaviour
 
     public GameObject prefab; // Which projectile prefab the tower will use
     public Vector3 projectileOffset; // UNUSED; to be used to determine a projectile's starting point
-	// TODO: Use Coroutine for the tower loop
+                                     // TODO: Use Coroutine for the tower loop
 
-	public void Awake()
+    private TowerData data;
+
+	public void initialize(TowerData data_)
 	{
         obj = this.gameObject;
-        print("Tower initialized!");
+        data = data_;
+        //print("Tower initialized!");
+
+        damage = data.damage;
+        range = data.range;
+        atkSpeed = data.atkSpeed;
+        projectileSpeed = data.projectileSpeed;
+        projectileOffset = data.projectileOffset;
+
+
 
 
         StartCoroutine(TowerLoop());

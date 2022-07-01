@@ -11,7 +11,7 @@ public class BuildButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public Image icon;
     public Text cost;
 
-	private BuildMenu buildMenu;
+	public BuildMenu buildMenu;
 
 	public GameObject prefab;
 
@@ -19,7 +19,6 @@ public class BuildButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	{
         data = _data;
 		tooltip = tooltip_;
-		buildMenu = GetComponentInParent<BuildMenu>();
 		prefab = (GameObject)Resources.Load("Prefabs/Tower");
 		//icon = this.gameObject.GetComponent<Image>();
 
@@ -39,8 +38,8 @@ public class BuildButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
 	public void BuildTower()
 	{
-		Debug.Log(buildMenu.clickedTIle == null); // TODO: clickedTile, or buildMenu is null. Figure this out
-		Tower newTower = TowerManager.CreateTower(buildMenu.clickedTIle.transform.position, prefab);
+		Tower newTower = TowerManager.CreateTower(buildMenu.clickedTIle.transform.position, prefab, data);
+		buildMenu.HideMenu();
 	}
 
 }

@@ -17,6 +17,7 @@ public class BuildMenu : MonoBehaviour
 		foreach (var t in TowerManager.types)
 		{
 			BuildButton newButton = Instantiate(buttonPrefab).GetComponent<BuildButton>();
+			newButton.buildMenu = this;
 			newButton.initialize((TowerData) t, tooltip);
 			newButton.transform.SetParent(buttonGrid.transform);
 			newButton.transform.localScale = new Vector3(1, 1, 1);
