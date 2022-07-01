@@ -31,7 +31,23 @@ public class BuildMenu : MonoBehaviour
 		RectTransform popupObject = buildPanel.GetComponent<RectTransform>();
 		Canvas masterCanvas = tooltip.masterCanvas;
 
-		Vector3 newPos = Input.mousePosition + offset;
+		// Thanks to: 'eses'
+		// https://forum.unity.com/threads/create-ui-health-markers-like-in-world-of-tanks.432935/
+
+		Vector3 offsetPos = new Vector3(clickedTIle.transform.position.x, clickedTIle.transform.position.y, clickedTIle.transform.position.z);
+
+		Vector2 canvasPos;
+		Vector2 screenPoint = Camera.main.WorldToScreenPoint(offsetPos);
+
+		RectTransformUtility.ScreenPointToLocalPointInRectangle(masterCanvas.GetComponent<RectTransform>(), screenPoint, null, out canvasPos);
+
+
+
+
+		//Vector3 newPos = Input.mousePosition + offset;
+		Vector3 newPos = canvasPos;
+
+		/*
 		newPos.z = 0f;
 		float rightEdgeToScreenEdgeDistance = Screen.width - (newPos.x + popupObject.rect.width * masterCanvas.scaleFactor / 2);
 		if (rightEdgeToScreenEdgeDistance < 0)
@@ -47,8 +63,8 @@ public class BuildMenu : MonoBehaviour
 		if (topEdgeToScreenEdgeDistance < 0)
 		{
 			newPos.y += topEdgeToScreenEdgeDistance;
-		}
-		popupObject.transform.position = newPos;
+		}*/
+		popupObject.transform.localPosition = newPos;
 	}
 	public void ShowMenu()
 	{

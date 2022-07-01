@@ -40,6 +40,7 @@ public class BuildButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	{
 		Tower newTower = TowerManager.CreateTower(buildMenu.clickedTIle.transform.position, prefab, data);
 		buildMenu.HideMenu();
+		tooltip.HidePopup();
 	}
 
 }
