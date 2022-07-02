@@ -3,35 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildMenu : MonoBehaviour
+// This is the panel that appears upon clicking a tile already occupied by a tower
+public class UpgradeMenu : MonoBehaviour
 {
-	public GameObject buttonPrefab;
-	public GameObject buttonGrid;
-	public GameObject buildPanel;
+	public TileScript clickedTile;
+	public GameObject upgradePanel;
 	[SerializeField] public Tooltip tooltip;
 
-	public TileScript clickedTile;
 
+	public Text towerName;
+	public Text damageText;
+	public Text attackSpeedText;
+	public Text rangeText;
 
 	public void Start()
 	{
-		foreach (var t in TowerManager.types)
-		{
-			BuildButton newButton = Instantiate(buttonPrefab).GetComponent<BuildButton>();
-			newButton.buildMenu = this;
-			newButton.initialize((TowerData) t, tooltip);
-			newButton.transform.SetParent(buttonGrid.transform);
-			newButton.transform.localScale = new Vector3(1, 1, 1);
-		}
-
 		HideMenu();
-		
 	}
 
 	public void MoveToCursor()
 	{
 		Vector3 offset = new Vector3(0, 0, 0);
-		RectTransform popupObject = buildPanel.GetComponent<RectTransform>();
+		RectTransform popupObject = upgradePanel.GetComponent<RectTransform>();
 		Canvas masterCanvas = tooltip.masterCanvas;
 
 		// Thanks to: 'eses'
@@ -69,9 +62,27 @@ public class BuildMenu : MonoBehaviour
 		}*/
 		popupObject.transform.localPosition = newPos;
 	}
+
+	public void Update()
+	{
+		UpdateValues();
+	}
+
+	public void UpdateValues()
+	{
+		if (this.gameObject.activeSelf && clickedTile != null)
+		{
+			towerName.text = clickedTile.tower.Data.name.ToString();
+			damageText.text = clickedTile.tower.damage.ToString();
+			attackSpeedText.text = clickedTile.tower.atkSpeed.ToString();
+			rangeText.text = clickedTile.tower.range.ToString();
+		}
+	}
+
 	public void ShowMenu()
 	{
 		this.gameObject.SetActive(true);
+		UpdateValues();
 		MoveToCursor();
 		Canvas.ForceUpdateCanvases();
 	}

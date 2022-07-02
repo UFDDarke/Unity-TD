@@ -15,9 +15,14 @@ public class Tower : MonoBehaviour
     public Vector3 projectileOffset; // UNUSED; to be used to determine a projectile's starting point
                                      // TODO: Use Coroutine for the tower loop
 
+    protected TileScript tile; // The tile that this tower currently resides on
+
+
     private TowerData data;
 
-	public void initialize(TowerData data_)
+	public TowerData Data { get => data;}
+
+	public void initialize(TowerData data_, TileScript tile_)
 	{
         obj = this.gameObject;
         data = data_;
@@ -29,8 +34,10 @@ public class Tower : MonoBehaviour
         projectileSpeed = data.projectileSpeed;
         projectileOffset = data.projectileOffset;
 
+        tile = tile_;
+        tile.tower = this;
 
-
+        this.gameObject.transform.position = tile.gameObject.transform.position;
 
         StartCoroutine(TowerLoop());
 	}

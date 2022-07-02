@@ -9,6 +9,8 @@ public class TileScript : MonoBehaviour
     public Vector2 pos;
     public int index;
     public int type = 0;
+    public Tower tower; // This is the tower currently placed on this tile
+
 
     void Start()
     {
