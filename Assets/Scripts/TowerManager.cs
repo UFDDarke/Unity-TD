@@ -27,7 +27,6 @@ public static class TowerManager
 	{
 		// Load in all tower data from resource folder
 		types = Resources.LoadAll("Tower", typeof(TowerData));
-		Debug.Log(types.Length);
 	}
 
 

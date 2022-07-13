@@ -24,7 +24,7 @@ public class LevelManagerEditor : Editor
         if(GUILayout.Button("Create Enemy") && Application.isPlaying)
         {
             // Create an enemy
-            Enemy newEnemy = EnemyManager.createEnemy("test", 1);
+            //Enemy newEnemy = EnemyManager.createEnemy("test", 1);
         }
 
 

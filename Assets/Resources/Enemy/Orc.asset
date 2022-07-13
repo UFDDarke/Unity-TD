@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Orc
   description: Brawny but slow, these relentless savages shrug off punishment.
-  maxHealth: 10
-  speed: 0.95
+  healthModifier: 1.1
+  speed: 0.8

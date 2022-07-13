@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8bd4c273f7b7bc4ebfdf52e8b8ee813, type: 3}
-  m_Name: Goblin
+  m_Name: Necromancer
   m_EditorClassIdentifier: 
-  name: Goblin
-  description: Generally weak and unthreatening, but can be a nuisance in groups.
-  healthModifier: 0.6
-  speed: 1
+  name: New Enemy
+  description: Practitioners of unholy magic. Raises skeletal guardians to protect
+    themselves.
+  healthModifier: 0.9
+  speed: 0.9

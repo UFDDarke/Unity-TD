@@ -10,29 +10,38 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public string enemyName;
+    public EnemyData data;
     public float health;
     public float healthMax;
     public GameObject obj; // The GameObject that Enemy.cs is attached to
     private static float BASESPEED = 1.0f;
     private int curNode = 0;
+    private HealthBar healthBar;
 
-    public void Init(string name_, float health_, Vector3 pos_)
+    public void Init(EnemyData data_, float health_, Vector3 pos_)
     {
         EnemyManager.enemyCount++;
         EnemyManager.enemies.Add(this.gameObject);
 
-        enemyName = name_;
-        health = health_;
-        healthMax = health_;
+        data = data_;
+
+        healthMax = data.healthModifier * health_;
+        health = healthMax;
+
+        healthBar = this.gameObject.GetComponentInChildren<HealthBar>();
+        healthBar.Initialize(this);
+
+
         obj = this.gameObject;
         obj.transform.position = pos_;
+
         StartCoroutine(movementTest());
     }
 
     public void takeDamage(float damage)
 	{
         health -= damage;
+        healthBar.UpdateValues();
         if(health <= 0)
 		{
             Cleanup();
@@ -65,7 +74,7 @@ public class Enemy : MonoBehaviour
             yield return null;
         }
 
-        print("we out here");
+        //print("we out here");
         Cleanup();
 
         yield return new WaitForSeconds(3f);

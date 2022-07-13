@@ -9,19 +9,20 @@ public static class EnemyManager
     public static int enemyCount = 0;
     public static GameObject enemyPrefab;
 
-    public static Enemy createEnemy(string name_, float health_, Vector3 pos_)
+    public static Enemy createEnemy(EnemyData data, float baseHealth, Vector3 pos_)
     {
+        // TODO: Make sure that this newly created enemy adheres to the path
         GameObject created = Object.Instantiate(enemyPrefab);
         Enemy createdEnemy = created.GetComponent<Enemy>();
 
 
-        createdEnemy.Init(name_, health_, pos_);
+        createdEnemy.Init(data, baseHealth, pos_);
         return createdEnemy;
     }
-    public static Enemy createEnemy(string name_, float health_)
+    public static Enemy createEnemy(EnemyData data, float baseHealth)
     {
         // Calls the proper createEnemy, but with pos_ equal to start point
-        return createEnemy(name_, health_, LevelManager.startTile.transform.position);
+        return createEnemy(data, baseHealth, LevelManager.startTile.transform.position);
     }
 
     public static void Reset()
