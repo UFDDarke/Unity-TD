@@ -17,22 +17,19 @@ public class Tower : MonoBehaviour
 
     protected TileScript tile; // The tile that this tower currently resides on
 
-
-    private TowerData data;
-
-	public TowerData Data { get => data;}
+	public TowerData Data { get; private set; }
 
 	public void initialize(TowerData data_, TileScript tile_)
 	{
         obj = this.gameObject;
-        data = data_;
+        Data = data_;
         //print("Tower initialized!");
 
-        damage = data.damage;
-        range = data.range;
-        atkSpeed = data.atkSpeed;
-        projectileSpeed = data.projectileSpeed;
-        projectileOffset = data.projectileOffset;
+        damage = Data.damage;
+        range = Data.range;
+        atkSpeed = Data.atkSpeed;
+        projectileSpeed = Data.projectileSpeed;
+        projectileOffset = Data.projectileOffset;
 
         tile = tile_;
         tile.tower = this;
@@ -44,14 +41,20 @@ public class Tower : MonoBehaviour
 
     public bool withinRange(Transform point)
 	{
-        return (Vector3.Distance(point.position, obj.transform.position) < range);
+        // Temporarily adding 0.1f range for some wiggle room.
+        return getDistance(point.transform) < range + 0.05f;
+	}
+
+    public float getDistance(Transform point)
+	{
+        return Vector2.Distance(this.gameObject.transform.position, point.gameObject.transform.position);
 	}
 
     public void fire(Enemy target_) // Can override to fire at a specific target.
 	{
         // TODO: Instantiate new projectile, set its target.
         //print("Tower fired!");
-        ProjectileManager.CreateProjectile(this, target);
+        ProjectileManager.CreateProjectile(this, target_);
 	}
 
     public void fire() // With no parameters, this fires at this tower's current target.
@@ -59,6 +62,12 @@ public class Tower : MonoBehaviour
         fire(target);
 	}
 
+    public void sellTower()
+	{
+        TowerManager.towers.Remove(this.gameObject);
+        tile.tower = null;
+        Destroy(this.gameObject);
+	}
     public IEnumerator TowerLoop()
 	{
 		while (true)

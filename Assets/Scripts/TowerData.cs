@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Tower Defense/New Tower")]
 public class TowerData : ScriptableObject
@@ -26,7 +27,7 @@ public class TowerData : ScriptableObject
     {
         StringBuilder builder = new StringBuilder();
 
-        builder.Append("Attack: " + (damage / atkSpeed) + " dps, Physical, " + range + " range").AppendLine();
+        builder.Append("Attack: " + Math.Round(damage / atkSpeed, 2) + " dps, Physical, " + range + " range").AppendLine();
         return builder.ToString();
     }
 }

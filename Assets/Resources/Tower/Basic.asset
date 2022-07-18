@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af709ec5eef2f0479f9a3cce0a0ec3d, type: 3}
   m_Name: Basic
   m_EditorClassIdentifier: 
-  name: Basic
+  name: Watchtower
   description: Basic watchtower with an archer on guard.
   icon: {fileID: 21300000, guid: d40311bc3732b60408c7dc9e80347d7f, type: 3}
   cost: 15
-  damage: 3
-  range: 8
-  atkSpeed: 1
+  damage: 4
+  range: 6
+  atkSpeed: 0.8
   projectileSpeed: 8
   prefab: {fileID: 0}
   projectileOffset: {x: 0, y: 0, z: 0}

@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour
 
         obj = this.gameObject;
         obj.transform.position = pos_;
+        obj.name = data.name;
+        obj.GetComponentInChildren<Renderer>().material.color = data.enemyColor;
 
         StartCoroutine(movementTest());
     }

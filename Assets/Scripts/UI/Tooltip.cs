@@ -13,6 +13,7 @@ public class Tooltip : MonoBehaviour
     [SerializeField] public RectTransform popupObject;
     [SerializeField] private Vector3 offset;
     [SerializeField] private float padding;
+    
 
 
     private Canvas popupCanvas;
@@ -65,6 +66,7 @@ public class Tooltip : MonoBehaviour
         footer.text = _footer;
 
         popupCanvasObject.SetActive(true);
+
         LayoutRebuilder.ForceRebuildLayoutImmediate(popupObject);
 	}
 

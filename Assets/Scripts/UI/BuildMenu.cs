@@ -11,7 +11,7 @@ public class BuildMenu : MonoBehaviour
 	[SerializeField] public Tooltip tooltip;
 
 	public TileScript clickedTile;
-
+	[SerializeField] public GameObject rangeIndicator;
 
 	public void Start()
 	{

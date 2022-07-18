@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af709ec5eef2f0479f9a3cce0a0ec3d, type: 3}
   m_Name: Fire
   m_EditorClassIdentifier: 
-  name: Fire Tower
+  name: Flamespewer
   description: This tower spews hot fire at enemies.
   icon: {fileID: 21300000, guid: e9fad011871e1ed47a59deb2d0901954, type: 3}
   cost: 25
   damage: 2
-  range: 7
-  atkSpeed: 0.4
+  range: 4
+  atkSpeed: 0.35
   projectileSpeed: 11
   prefab: {fileID: 0}
   projectileOffset: {x: 0, y: 0, z: 0}

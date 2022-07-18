@@ -29,11 +29,15 @@ public class BuildButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		tooltip.DisplayInfo(data.name, data.GetTooltipInfo(), data.description);
+		buildMenu.rangeIndicator.SetActive(true);
+		buildMenu.rangeIndicator.transform.position = buildMenu.clickedTile.transform.position;
+		buildMenu.rangeIndicator.transform.localScale = new Vector3(data.range * 2, data.range * 2, 1);
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
 		tooltip.HidePopup();
+		buildMenu.rangeIndicator.SetActive(false);
 	}
 
 	public void BuildTower()
@@ -41,6 +45,7 @@ public class BuildButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 		Tower newTower = TowerManager.CreateTower(buildMenu.clickedTile, prefab, data);
 		buildMenu.HideMenu();
 		tooltip.HidePopup();
+		buildMenu.rangeIndicator.SetActive(false);
 	}
 
 }

@@ -12,7 +12,7 @@ enum Direction
     WEST // 3
 }
 
-enum TileType
+public enum TileType
 {
     WALL, // 0
     PATH, // 1
@@ -64,9 +64,9 @@ public static class LevelManager
         endTile = tiles[tiles.Count - 1];
 
         startTile.GetComponentInChildren<SpriteRenderer>().material = buildableMaterial;
-        startTile.GetComponent<TileScript>().type = (int)TileType.START;
+        startTile.GetComponent<TileScript>().type = TileType.START;
         endTile.GetComponentInChildren<SpriteRenderer>().material = emptyMaterial;
-        endTile.GetComponent<TileScript>().type = (int)TileType.END;
+        endTile.GetComponent<TileScript>().type = TileType.END;
 
         #endregion
 
@@ -82,7 +82,7 @@ public static class LevelManager
             GameObject pathTile = getTileAtCoordinate(0, i);
             pathTile.GetComponentInChildren<SpriteRenderer>().material = roadMaterial;
             path.Add(pathTile);
-            pathTile.GetComponent<TileScript>().type = (int)TileType.PATH;
+            pathTile.GetComponent<TileScript>().type = TileType.PATH;
         }
 
         for (int i = 0; i < length - 1; i++)
@@ -90,7 +90,7 @@ public static class LevelManager
             GameObject pathTile = getTileAtCoordinate(i, height - 1);
             pathTile.GetComponentInChildren<SpriteRenderer>().material = roadMaterial;
             path.Add(pathTile);
-            pathTile.GetComponent<TileScript>().type = (int)TileType.PATH;
+            pathTile.GetComponent<TileScript>().type = TileType.PATH;
         }
 
         path.Add(tiles[tiles.Count - 1]);

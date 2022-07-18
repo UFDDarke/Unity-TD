@@ -31,27 +31,40 @@ public class UserControl : MonoBehaviour
                 // Check if clicked object is a tile
                 if(obj.GetComponent<TileScript>() != null)
 				{
-                    // We clicked on a tile. Now, check if there is a tower currently placed on that tile
+                    // We clicked on a tile. Check if it's a buildable tile.
+                    TileScript clickedTile = obj.GetComponent<TileScript>();
 
-                    if(obj.GetComponent<TileScript>().tower != null)
+                    if(clickedTile.type == TileType.WALL)
 					{
-                        // There's a tower on this tile, so bring up the upgrade panel
-                        upgradeMenu.clickedTile = obj.GetComponent<TileScript>();
-                        upgradeMenu.ShowMenu();
+                        switch(clickedTile.tower)
+						{
+                            case null:
+                                Debug.Log("Clicked on a tile with a null tower");
+                                buildMenu.clickedTile = clickedTile;
+                                buildMenu.ShowMenu();
+                                upgradeMenu.HideMenu();
+
+                                break;
+                            default:
+                                Debug.Log("Clicked on a tile with a tower present");
+                                upgradeMenu.clickedTile = clickedTile;
+                                upgradeMenu.ShowMenu();
+                                buildMenu.HideMenu();
+                                break;
+						}
+					}
+
+                    if(clickedTile.type == TileType.PATH)
+					{
                         buildMenu.HideMenu();
-					} else
-					{
-                        // No tower on the tile, bring up the build panel
-
-                        buildMenu.clickedTile = obj.GetComponent<TileScript>();
-                        buildMenu.ShowMenu();
                         upgradeMenu.HideMenu();
                     }
+
 				}
             }
             else
             {
-                // Didn't click on anything, so hide the build menu
+                // Didn't click on anything, so hide the menus
                 buildMenu.HideMenu();
                 upgradeMenu.HideMenu();
             }

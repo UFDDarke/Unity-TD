@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UpgradeMenu : MonoBehaviour
 {
 	public TileScript clickedTile;
+	public Tower clickedTower;
 	public GameObject upgradePanel;
 	[SerializeField] public Tooltip tooltip;
 
@@ -15,6 +16,7 @@ public class UpgradeMenu : MonoBehaviour
 	public Text damageText;
 	public Text attackSpeedText;
 	public Text rangeText;
+	public GameObject rangeIndicator;
 
 	public void Start()
 	{
@@ -61,6 +63,7 @@ public class UpgradeMenu : MonoBehaviour
 			newPos.y += topEdgeToScreenEdgeDistance;
 		}*/
 		popupObject.transform.localPosition = newPos;
+		rangeIndicator.transform.position = clickedTile.pos;
 	}
 
 	public void Update()
@@ -76,21 +79,31 @@ public class UpgradeMenu : MonoBehaviour
 			damageText.text = clickedTile.tower.damage.ToString();
 			attackSpeedText.text = clickedTile.tower.atkSpeed.ToString();
 			rangeText.text = clickedTile.tower.range.ToString();
+			rangeIndicator.transform.localScale = new Vector2(2 * clickedTile.tower.range, 2 * clickedTile.tower.range);
 		}
 	}
 
 	public void ShowMenu()
 	{
 		this.gameObject.SetActive(true);
+		rangeIndicator.SetActive(true);
 		UpdateValues();
 		MoveToCursor();
+		this.clickedTower = clickedTile.tower;
 		Canvas.ForceUpdateCanvases();
+	}
+
+	public void Sell()
+	{
+		clickedTower.sellTower();
+		HideMenu();
 	}
 
 	public void HideMenu()
 	{
 		this.gameObject.SetActive(false);
 		clickedTile = null;
+		rangeIndicator.SetActive(false);
 	}
 
 }
