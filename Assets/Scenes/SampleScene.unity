@@ -1401,7 +1401,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1686859532}
         m_TargetAssemblyTypeName: UpgradeMenu, Assembly-CSharp
-        m_MethodName: HideMenu
+        m_MethodName: Sell
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3738,6 +3738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickedTile: {fileID: 0}
+  clickedTower: {fileID: 0}
   upgradePanel: {fileID: 390937062}
   tooltip: {fileID: 814149077}
   towerName: {fileID: 1221709226}

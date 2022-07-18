@@ -17,3 +17,4 @@ MonoBehaviour:
   healthModifier: 0.6
   speed: 1
   sizeClass: 0
+  enemyColor: {r: 0.39279917, g: 0.6792453, b: 0.3300107, a: 1}

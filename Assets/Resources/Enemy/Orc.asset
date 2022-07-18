@@ -16,3 +16,5 @@ MonoBehaviour:
   description: Brawny but slow, these relentless savages shrug off punishment.
   healthModifier: 1.1
   speed: 0.8
+  sizeClass: 1
+  enemyColor: {r: 0.02071268, g: 0.33962262, b: 0.014417935, a: 1}
