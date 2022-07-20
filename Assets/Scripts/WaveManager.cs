@@ -34,7 +34,7 @@ public class WaveManager : MonoBehaviour
 	private float BaseHealth()
 	{
 		//float health = ((1.1f * waveNumber) * (1.1f * waveNumber)) + (waveNumber * 10) + (50);
-		float health = Mathf.Pow(waveNumber - 1, 2.0f) + ((waveNumber - 1) * 10) + 50;
+		float health = Mathf.Pow(waveNumber - 1, 2.0f) + ((waveNumber - 1) * 5) + 10;
 
 		return health;
 	}

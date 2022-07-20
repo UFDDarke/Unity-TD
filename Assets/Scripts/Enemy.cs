@@ -42,6 +42,7 @@ public class Enemy : MonoBehaviour
 
     public void takeDamage(float damage)
 	{
+        DamageText.CreateFloatingText(damage, gameObject.transform.position);
         health -= damage;
         healthBar.UpdateValues();
         if(health <= 0)

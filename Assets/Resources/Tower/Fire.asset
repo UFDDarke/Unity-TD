@@ -20,6 +20,7 @@ MonoBehaviour:
   range: 4
   atkSpeed: 0.35
   projectileSpeed: 11
+  maxTargets: 10
+  canHitSameTarget: 0
   prefab: {fileID: 0}
   projectileOffset: {x: 0, y: 0, z: 0}
-  scripts: []
