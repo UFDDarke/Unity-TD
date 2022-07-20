@@ -71,7 +71,7 @@ public class WaveManager : MonoBehaviour
 		while(enemiesToSpawn > 0)
 		{
 			Enemy newEnemy = EnemyManager.createEnemy(generatedEnemy, BaseHealth());
-			Debug.Log(generatedEnemy.sizeClass);
+			//Debug.Log(generatedEnemy.sizeClass);
 			enemiesToSpawn--;
 
 			yield return new WaitForSeconds(1 * newEnemy.data.healthModifier / newEnemy.data.speed);

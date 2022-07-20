@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
     //public Enemy[] target = new Enemy[30]; // Tower's current target.
-    public List<Enemy> targets = new List<Enemy>();
+    //public List<Enemy> targets = new List<Enemy>();
+    public Enemy[] targets;
 
     public GameObject obj; // GameObject that Tower.cs is attached to
     public GameObject prefab; // Which projectile prefab the tower will use
@@ -17,7 +19,10 @@ public class Tower : MonoBehaviour
     public float range;
     public float atkSpeed; // How much time, in seconds, this tower has to wait to make another attack.
     public float projectileSpeed; // How fast the tower's projectiles are
+    public float criticalChance;
+    public float criticalDamage;
     [SerializeField]
+    // TODO: Automatically adjust size of target array if maxNumberTargets changes
     private int maxNumberTargets; // How many targets can this tower fire at per attack?
     private bool canAcquireSameTarget; // If tower can fire at multiple targets, is tower able to fire at the same target?
 
@@ -35,6 +40,11 @@ public class Tower : MonoBehaviour
         projectileSpeed = Data.projectileSpeed;
         projectileOffset = Data.projectileOffset;
         maxNumberTargets = Data.maxTargets;
+        canAcquireSameTarget = Data.canHitSameTarget;
+        targets = new Enemy[maxNumberTargets];
+        criticalChance = Data.criticalChance;
+        criticalDamage = Data.criticalDamage;
+       
 
         tile = tile_;
         tile.tower = this;
@@ -80,7 +90,7 @@ public class Tower : MonoBehaviour
 
         for(int i = 0; i < maxNumberTargets; i++)
 		{
-            if (targets.Count == 0 || targets[i] == null || !withinRange(targets[i].transform)) {
+            if (targets[i] == null || !withinRange(targets[i].transform)) {
                 Debug.Log("Acquiring new target for index " + i);
                 AcquireNewTarget(i);
 			}
@@ -89,16 +99,8 @@ public class Tower : MonoBehaviour
 
     private void AcquireNewTarget(int index)
 	{
-        // HACKFIX
-        // TODO: Remove empty targets from list
-        if(targets.Count == 0)
-		{
-            targets.Add(null);
-        }
-        
-
-        // Since we know our current target is no longer valid, let's null it for now
-        targets.Insert(index, null);
+        // Since we know our current target is no longer valid, let's remove it for now
+        targets[index] = null;
 
         // Looking for a new target. Let's search all enemies until we find one in range.
 
@@ -110,8 +112,7 @@ public class Tower : MonoBehaviour
                     if(enemy != null && withinRange(enemy.transform))
 					{
                         // Target acquired!
-                        //targets[index] = enemy.GetComponent<Enemy>();
-                        targets.Insert(index, enemy.GetComponent<Enemy>());
+                        targets[index] = enemy.GetComponent<Enemy>();
                         return;
 					}
                     break;
@@ -119,8 +120,7 @@ public class Tower : MonoBehaviour
                     if(enemy != null && withinRange(enemy.transform) && !targets.Contains(enemy.GetComponent<Enemy>()))
 					{
                         // Target acquired!
-                        //targets[index] = enemy.GetComponent<Enemy>();
-                        targets.Insert(index, enemy.GetComponent<Enemy>());
+                        targets[index] = enemy.GetComponent<Enemy>();
                         return;
                     }
                     break;

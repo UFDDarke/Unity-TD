@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
 	{
         if(target != null)
 		{
-            target.takeDamage(damage);
+            target.takeDamage(damage, owner);
         }
 
         Destroy(obj);
@@ -60,7 +60,7 @@ public class Projectile : MonoBehaviour
             yield return null;
         }
 
-        print("Projectile collision");
+        //print("Projectile collision");
         Damage();
     }
 }

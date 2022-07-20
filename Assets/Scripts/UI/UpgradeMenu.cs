@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +15,10 @@ public class UpgradeMenu : MonoBehaviour
 
 	public Text towerName;
 	public Text damageText;
+	public Text multishotText;
 	public Text attackSpeedText;
 	public Text rangeText;
+	public Text extraTraits;
 	public GameObject rangeIndicator;
 
 	public void Start()
@@ -75,11 +78,60 @@ public class UpgradeMenu : MonoBehaviour
 	{
 		if (this.gameObject.activeSelf && clickedTile != null)
 		{
-			towerName.text = clickedTile.tower.Data.name.ToString();
-			damageText.text = clickedTile.tower.damage.ToString();
-			attackSpeedText.text = clickedTile.tower.atkSpeed.ToString();
-			rangeText.text = clickedTile.tower.range.ToString();
-			rangeIndicator.transform.localScale = new Vector2(2 * clickedTile.tower.range, 2 * clickedTile.tower.range);
+			Tower tower = clickedTile.tower;
+			towerName.text = tower.Data.name.ToString();
+			damageText.text = tower.damage.ToString();
+
+			if(tower.Data.maxTargets > 1)
+			{
+				// show multishot text
+				multishotText.gameObject.SetActive(true);
+				multishotText.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text = tower.Data.maxTargets.ToString();
+			} else
+			{
+				// hide multishot text
+				multishotText.gameObject.SetActive(false);
+			}
+
+
+			attackSpeedText.text = tower.atkSpeed.ToString();
+			rangeText.text = tower.range.ToString();
+			rangeIndicator.transform.localScale = new Vector2(2 * tower.range, 2 * tower.range);
+
+			StringBuilder builder = new StringBuilder();
+			bool needNewline = false;
+
+			if(tower.Data.criticalChance > 0 && tower.Data.criticalDamage > 0)
+			{
+				builder.Append("<b>" + (tower.criticalChance * 100).ToString() + "%</b> chance for <b>+" + (tower.criticalDamage * 100).ToString() + "</b>% extra damage.");
+				needNewline = true;
+			}
+
+			if(tower.Data.canHitSameTarget)
+			{
+				if(needNewline)
+				{
+					builder.AppendLine();
+				}
+				builder.Append("Excess projectiles strike main target.");
+				needNewline = true;
+			}
+
+
+			string builtString = builder.ToString();
+			if (builtString.Length == 0)
+			{
+				// No extra traits on tower, so hide the extra traits
+				extraTraits.gameObject.transform.parent.gameObject.SetActive(false);
+			} else
+			{
+				// Built string has content, so let's show it.
+				extraTraits.text = builtString;
+				extraTraits.gameObject.transform.parent.gameObject.SetActive(true);
+			}
+
+			LayoutRebuilder.ForceRebuildLayoutImmediate(upgradePanel.GetComponent<RectTransform>());
+
 		}
 	}
 

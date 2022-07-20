@@ -14,7 +14,10 @@ public class TowerData : ScriptableObject
     [Min(1)]
     public int cost;
 
-    [Header("Attack Stats")]
+
+
+
+    [Header("Attack Stats")] //              Attack Stats
     [Min(0.5f)]
     [Tooltip("Damage dealt per attack hit.")]
     public float damage;
@@ -28,17 +31,27 @@ public class TowerData : ScriptableObject
     public float atkSpeed;
 
     [Range(1f, 30f)]
-    public float projectileSpeed; // How fast the tower's projectiles are
+    public float projectileSpeed;
 
+    [Tooltip("Percent chance to deal Critical Damage upon hit.")]
+    [Range(0f, 1)]
+    public float criticalChance = 0.05f;
+
+    [Tooltip("Upon dealing a critical strike, deals additional damage equal to this percentage.")]
+    [Range(0f, 5f)]
+    public float criticalDamage = 0.80f;
+
+
+
+
+    [Header("Targets")] //               Targets
     [Range(1, 30)]
     [Tooltip("How many targets this tower may fire at per attack.")]
-    public int maxTargets = 1; // How many targets this tower can fire at
+    public int maxTargets = 1;
 
     [Tooltip("If firing more than one projectile, can additional projectiles target the same enemy?")]
-    public bool canHitSameTarget = false; // If maxTargets> > 1, can additional projectiles fire at the same target?
+    public bool canHitSameTarget = false;
 
-
-    
     [Header("MISC")]
     [HideInInspector]
     public GameObject prefab; // Which projectile prefab the tower will use

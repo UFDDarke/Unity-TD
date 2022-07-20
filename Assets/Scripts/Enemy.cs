@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 
@@ -40,10 +41,29 @@ public class Enemy : MonoBehaviour
         StartCoroutine(movementTest());
     }
 
-    public void takeDamage(float damage)
+    public void takeDamage(float damage, Tower owner)
 	{
-        DamageText.CreateFloatingText(damage, gameObject.transform.position);
-        health -= damage;
+        float modifiedDamage = damage;
+        StringBuilder builder = new StringBuilder();
+        int critCount = 0;
+
+        // Check for a critical strike
+        if (Random.Range(0f, 1f) < owner.criticalChance)
+		{
+            // Critical strike!
+            modifiedDamage *= (1 + (owner.criticalDamage));
+            critCount++;
+		}
+
+        builder.Append(modifiedDamage.ToString());
+        for(int i = 0; i < critCount; i++)
+		{
+            // Appending an exclamation mark for crits
+            builder.Append("!");
+		}
+
+        DamageText.CreateFloatingText(builder.ToString(), gameObject.transform.position);
+        health -= modifiedDamage;
         healthBar.UpdateValues();
         if(health <= 0)
 		{
