@@ -12,15 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af709ec5eef2f0479f9a3cce0a0ec3d, type: 3}
   m_Name: Tesla
   m_EditorClassIdentifier: 
-  name: New Tower
-  description: Tower description here
-  icon: {fileID: 0}
+  name: Tesla
+  description: Chaotic energy lashes out periodically around this tower, allowing
+    it to attack multiple foes.
+  icon: {fileID: 21300000, guid: cbd4fa5d7fca4f945961c4c0c1cf301b, type: 3}
   cost: 0
-  damage: 0
-  range: 0
-  atkSpeed: 0
-  projectileSpeed: 0
-  maxTargets: 1
+  damage: 4
+  range: 6
+  atkSpeed: 3
+  projectileSpeed: 20.1
+  criticalChance: 0.05
+  criticalDamage: 0.8
+  maxTargets: 30
   canHitSameTarget: 0
   prefab: {fileID: 0}
   projectileOffset: {x: 0, y: 0, z: 0}
