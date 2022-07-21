@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     private static float BASESPEED = 1.0f;
     private int curNode = 0;
     private HealthBar healthBar;
+    [SerializeField] private DamageEvent onDamaged;
 
     public void Init(EnemyData data_, float health_, Vector3 pos_)
     {
@@ -43,16 +44,22 @@ public class Enemy : MonoBehaviour
 
     public void takeDamage(float damage, Tower owner)
 	{
+        DamageInfo damageInfo = new DamageInfo();
+        damageInfo.attacker = owner;
+        damageInfo.victim = this;
+        damageInfo.baseDamage = damage;
+
         float modifiedDamage = damage;
         StringBuilder builder = new StringBuilder();
         int critCount = 0;
 
-        // Check for a critical strike
+        // Check for a critical strike TODO: Multicrit support
         if (Random.Range(0f, 1f) < owner.criticalChance)
 		{
             // Critical strike!
             modifiedDamage *= (1 + (owner.criticalDamage));
             critCount++;
+            damageInfo.wasCritical = true;
 		}
 
         builder.Append(modifiedDamage.ToString());
@@ -65,6 +72,10 @@ public class Enemy : MonoBehaviour
         DamageText.CreateFloatingText(builder.ToString(), gameObject.transform.position);
         health -= modifiedDamage;
         healthBar.UpdateValues();
+
+        damageInfo.wasLethal = (health < 0);
+        onDamaged.Raise(damageInfo);
+
         if(health <= 0)
 		{
             Cleanup();
@@ -108,4 +119,14 @@ public class Enemy : MonoBehaviour
         EnemyManager.enemyCount--;
     }
 
+}
+
+public class DamageInfo {
+    public Tower attacker;
+    public Enemy victim;
+
+    public float baseDamage;
+    public float finalDamage;
+    public bool wasLethal = false;
+    public bool wasCritical = false;
 }

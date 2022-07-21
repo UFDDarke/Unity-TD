@@ -105,6 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6677035995297833645}
   - component: {fileID: 6677035995297833644}
+  - component: {fileID: 5256521995488084301}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -139,11 +140,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5156b1eeefe5f4aba77bbbfa334f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targets: []
+  obj: {fileID: 6677035995297833647}
+  prefab: {fileID: 4090893688579617805, guid: 72faf1056f833d64993a5b8dce287f85, type: 3}
+  projectileOffset: {x: 0, y: 0, z: 0}
   damage: 1
   range: 8
   atkSpeed: 1
   projectileSpeed: 6
-  target: {fileID: 0}
-  obj: {fileID: 6677035995297833647}
-  prefab: {fileID: 4090893688579617805, guid: 72faf1056f833d64993a5b8dce287f85, type: 3}
-  projectileOffset: {x: 0, y: 0, z: 0}
+  criticalChance: 0
+  criticalDamage: 0
+  maxNumberTargets: 0
+--- !u!114 &5256521995488084301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6677035995297833647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f16c617654a10143a657ec86b956f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dc3f52bb44030ec47a8e19420899d25d, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6677035995297833644}
+        m_TargetAssemblyTypeName: Tower, Assembly-CSharp
+        m_MethodName: DamageEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

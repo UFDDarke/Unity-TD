@@ -25,6 +25,7 @@ public class Tower : MonoBehaviour
     // TODO: Automatically adjust size of target array if maxNumberTargets changes
     private int maxNumberTargets; // How many targets can this tower fire at per attack?
     private bool canAcquireSameTarget; // If tower can fire at multiple targets, is tower able to fire at the same target?
+    public DamageInfo lastDamageInfo; // This is alwa
 
     public TowerData Data { get; private set; }
 
@@ -91,10 +92,27 @@ public class Tower : MonoBehaviour
         for(int i = 0; i < maxNumberTargets; i++)
 		{
             if (targets[i] == null || !withinRange(targets[i].transform)) {
-                Debug.Log("Acquiring new target for index " + i);
+                //Debug.Log("Acquiring new target for index " + i);
                 AcquireNewTarget(i);
 			}
 		}
+	}
+
+    public void DamageEvent(DamageInfo info)
+	{
+        if (info.attacker != this) return;
+
+        lastDamageInfo = info;
+
+        foreach(ScriptableAction action in Data.onDamageActions)
+		{
+            action.PerformAction(this.gameObject);
+		}
+
+
+
+
+        lastDamageInfo = null;
 	}
 
     private void AcquireNewTarget(int index)
@@ -189,5 +207,4 @@ public class Tower : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 	}
-
 }

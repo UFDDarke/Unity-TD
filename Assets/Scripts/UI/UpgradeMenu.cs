@@ -117,6 +117,18 @@ public class UpgradeMenu : MonoBehaviour
 				needNewline = true;
 			}
 
+			// Generate Tooltips
+			foreach (ScriptableAction action in tower.Data.onAttackActions)
+			{
+				bool success = BuildTooltip(builder, action, needNewline);
+				if (success) needNewline = true;
+			}
+
+			foreach (ScriptableAction action in tower.Data.onDamageActions)
+			{
+				bool success = BuildTooltip(builder, action, needNewline);
+				if (success) needNewline = true;
+			}
 
 			string builtString = builder.ToString();
 			if (builtString.Length == 0)
@@ -133,6 +145,33 @@ public class UpgradeMenu : MonoBehaviour
 			LayoutRebuilder.ForceRebuildLayoutImmediate(upgradePanel.GetComponent<RectTransform>());
 
 		}
+	}
+
+	private bool BuildTooltip(StringBuilder builder, ScriptableAction action, bool needNewline)
+	{
+		string generatedTooltip = GenerateTooltip(action);
+
+		if (generatedTooltip != null)
+		{
+			if (needNewline)
+			{
+				builder.AppendLine();
+			}
+
+			builder.Append(generatedTooltip);
+
+			return true;
+		}
+
+		return false;
+	}
+
+	private string GenerateTooltip(ScriptableAction action)
+	{
+		// ScriptableActions handle their own tooltips, this function just fetches it
+		string generatedString = action.GenerateTooltip();
+
+		return generatedString;
 	}
 
 	public void ShowMenu()

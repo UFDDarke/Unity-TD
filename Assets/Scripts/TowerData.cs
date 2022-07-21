@@ -52,11 +52,23 @@ public class TowerData : ScriptableObject
     [Tooltip("If firing more than one projectile, can additional projectiles target the same enemy?")]
     public bool canHitSameTarget = false;
 
-    [Header("MISC")]
+    [Header("Scriptable Actions")]
+    [Space(20)]
+
+    [Tooltip("Actions to perform upon the tower making an attack.")]
+    [SerializeField]
+    public List<ScriptableAction> onAttackActions = default;
+    
+    [Tooltip("Actions to perform upon the tower damaging an enemy.")]
+    [SerializeReference]
+    public List<ScriptableAction> onDamageActions = default;
+
     [HideInInspector]
     public GameObject prefab; // Which projectile prefab the tower will use
     [HideInInspector]
     public Vector3 projectileOffset; // UNUSED; to be used to determine a projectile's starting point
+
+
 
     //[Header("Place tower-specific scripts in this list")]
     //public List<Tower> scripts; // place tower-specific scripts in this list, which will override Tower.cs to implement specialized functionality

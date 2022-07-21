@@ -144,6 +144,7 @@ MonoBehaviour:
   health: 1
   healthMax: 1
   obj: {fileID: 0}
+  onDamaged: {fileID: 11400000, guid: dc3f52bb44030ec47a8e19420899d25d, type: 2}
 --- !u!1 &6462842604368551826
 GameObject:
   m_ObjectHideFlags: 0
