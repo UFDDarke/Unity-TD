@@ -54,10 +54,10 @@ public class Enemy : MonoBehaviour
         int critCount = 0;
 
         // Check for a critical strike TODO: Multicrit support
-        if (Random.Range(0f, 1f) < owner.criticalChance)
+        if (Random.Range(0f, 1f) < owner.CriticalChance)
 		{
             // Critical strike!
-            modifiedDamage *= (1 + (owner.criticalDamage));
+            modifiedDamage *= (1 + (owner.CriticalDamage));
             critCount++;
             damageInfo.wasCritical = true;
 		}

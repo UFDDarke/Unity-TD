@@ -15,17 +15,75 @@ public class Tower : MonoBehaviour
     protected TileScript tile; // The tile that this tower currently resides on
     public Vector3 projectileOffset; // UNUSED; to be used to determine a projectile's starting point
 
-    public float damage;
-    public float range;
-    public float atkSpeed; // How much time, in seconds, this tower has to wait to make another attack.
-    public float projectileSpeed; // How fast the tower's projectiles are
-    public float criticalChance;
-    public float criticalDamage;
+    [SerializeField]
+    private float damage;
+    [SerializeField]
+    private float range;
+    [SerializeField]
+    private float atkSpeed; // How much time, in seconds, this tower has to wait to make another attack.
+    [SerializeField]
+    private float projectileSpeed; // How fast the tower's projectiles are
+    [SerializeField]
+    private float criticalChance;
+    [SerializeField]
+    private float criticalDamage;
+
+
+    public float Damage
+	{
+        get
+		{
+            return buffs.processDamage(damage);
+		}
+	}
+
+    public float Range
+    {
+        get
+        {
+            return buffs.processRange(range);
+        }
+    }
+
+    public float AtkSpeed
+	{
+        get
+		{
+            return buffs.processSpeed(atkSpeed);
+		}
+	}
+
+    public float CriticalChance
+	{
+        get
+		{
+            return buffs.processCritChance(criticalChance);
+		}
+	}
+
+    public float CriticalDamage
+    {
+        get
+        {
+            return buffs.processCritDamage(criticalDamage);
+        }
+    }
+
+    public float ProjectileSpeed
+	{
+        get
+		{
+            return buffs.processProjSpeed(projectileSpeed);
+		}
+	}
+
     [SerializeField]
     // TODO: Automatically adjust size of target array if maxNumberTargets changes
     private int maxNumberTargets; // How many targets can this tower fire at per attack?
     private bool canAcquireSameTarget; // If tower can fire at multiple targets, is tower able to fire at the same target?
     public DamageInfo lastDamageInfo; // This is alwa
+
+    public BuffComponent buffs;
 
     public TowerData Data { get; private set; }
 
@@ -50,6 +108,8 @@ public class Tower : MonoBehaviour
         tile = tile_;
         tile.tower = this;
 
+        buffs = this.gameObject.GetComponent<BuffComponent>();
+
         this.gameObject.transform.position = tile.gameObject.transform.position;
 
         StartCoroutine(TowerLoop());
@@ -58,7 +118,7 @@ public class Tower : MonoBehaviour
     public bool withinRange(Transform point)
 	{
         // Temporarily adding 0.1f range for some wiggle room.
-        return getDistance(point.transform) < range + 0.05f;
+        return getDistance(point.transform) < Range + 0.05f;
 	}
 
     public float getDistance(Transform point)
@@ -188,7 +248,7 @@ public class Tower : MonoBehaviour
 
             if(attackSuccess)
 			{
-                yield return new WaitForSeconds(atkSpeed);
+                yield return new WaitForSeconds(AtkSpeed);
                 continue;
 			}
 

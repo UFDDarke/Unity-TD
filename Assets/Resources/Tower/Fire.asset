@@ -24,5 +24,7 @@ MonoBehaviour:
   criticalDamage: 0.8
   maxTargets: 3
   canHitSameTarget: 1
+  onAttackActions: []
+  onDamageActions: []
   prefab: {fileID: 0}
   projectileOffset: {x: 0, y: 0, z: 0}

@@ -12,7 +12,7 @@ public static class ProjectileManager
 		Projectile newProjectile = newObj.GetComponent<Projectile>();
 		newObj.transform.parent = tower.transform;
 		newObj.transform.position = tower.obj.transform.position + tower.projectileOffset;
-		newProjectile.Init(tower, target, tower.projectileSpeed, tower.damage);
+		newProjectile.Init(tower, target, tower.ProjectileSpeed, tower.Damage);
 	}
 
 

@@ -7,8 +7,7 @@ using UnityEngine;
 public class OnCrit_TowerSelfBuff : ScriptableAction
 {
 	[SerializeField]
-	[Range(0.01f, 10f)]
-	private float spdModifier = 0.995f;
+	private BuffData teslaBuff;
 
 	public override void PerformAction(GameObject obj)
 	{
@@ -25,11 +24,12 @@ public class OnCrit_TowerSelfBuff : ScriptableAction
 	public void GrantBuff(Tower tower)
 	{
 		// Grants attack speed buff to tower
-		tower.atkSpeed *= spdModifier;
+		//tower.atkSpeed *= spdModifier;
+		tower.buffs.ApplyBuff(teslaBuff);
 	}
 
 	public override string GenerateTooltip()
 	{
-		return "Upon crit, tower gains <b>+" + Mathf.Round((1 - (1 * spdModifier)) * 1000) / 1000f + "%</b> attack speed permanently.";
+		return "Upon crit, tower gains <b>+" + Mathf.Round((1 - (1 * teslaBuff.Stats.spdPercentMod)) * 1000) / 1000f + "%</b> attack speed permanently.";
 	}
 }
