@@ -34,4 +34,23 @@ public static class EnemyManager
         enemies.Clear();
     }
 
+    public static List<Enemy> GetEnemiesInRange(Vector2 pos, float range)
+	{
+        List<Enemy> withinRange = new List<Enemy>();
+
+        foreach(GameObject enemy in enemies)
+		{
+            if (!enemy) continue;
+
+
+            if(Vector2.Distance(pos, enemy.transform.position) <= range)
+			{
+                withinRange.Add(enemy.GetComponent<Enemy>());
+			}
+		}
+
+        if (withinRange.Count <= 0) return null;
+
+        return withinRange;
+	}
 }

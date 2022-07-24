@@ -28,6 +28,8 @@ public class Tower : MonoBehaviour
     [SerializeField]
     private float criticalDamage;
 
+    [Header("Misc")]
+    [SerializeField] private AttackEvent onAttack;
 
     public float Damage
 	{
@@ -131,11 +133,12 @@ public class Tower : MonoBehaviour
         // TODO: Instantiate new projectile, set its target.
         //print("Tower fired!");
         ProjectileManager.CreateProjectile(this, target_);
-	}
+        onAttack.Raise(this);
+    }
 
     public void fire() // With no parameters, this fires at this tower's current target.
 	{
-        //fire(target);
+        fire(targets[0]);
 	}
 
     public void sellTower()
@@ -157,6 +160,16 @@ public class Tower : MonoBehaviour
 			}
 		}
 	}
+
+    public void AttackEvent(Tower tower)
+	{
+        if (tower != this) return;
+
+        foreach (ScriptableAction action in Data.onAttackActions)
+        {
+            action.PerformAction(this.gameObject);
+        }
+    }
 
     public void DamageEvent(DamageInfo info)
 	{

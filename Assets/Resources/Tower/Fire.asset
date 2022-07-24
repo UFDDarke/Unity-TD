@@ -17,12 +17,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: e9fad011871e1ed47a59deb2d0901954, type: 3}
   cost: 25
   damage: 2
-  range: 4
+  range: 2
   atkSpeed: 0.35
   projectileSpeed: 11
   criticalChance: 0.05
   criticalDamage: 0.8
-  maxTargets: 3
+  maxTargets: 2
   canHitSameTarget: 1
   onAttackActions: []
   onDamageActions: []

@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c07e40dcabd8904da3233b063f600c2, type: 3}
-  m_Name: Tesla_PowerSurge(AtkSpd)
+  m_Script: {fileID: 11500000, guid: 96398ddcdbd57ab48b2eab243ac8b20d, type: 3}
+  m_Name: GameEvent_OnTowerAttack
   m_EditorClassIdentifier: 
-  teslaBuff: {fileID: 11400000, guid: 984b2283ae03af24d8ae145e2863a5d6, type: 2}

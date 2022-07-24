@@ -37,7 +37,7 @@ public class Buff
 		// This is the function called when this buff expires.
 		// TODO: Buff Expire event?
 
-		Debug.Log("Buff expired");
+		//Debug.Log("Buff expired");
 		owner.RemoveBuff(this);
 	}
 }
