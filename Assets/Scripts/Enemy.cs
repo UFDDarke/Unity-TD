@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
     private HealthBar healthBar;
     [SerializeField] private DamageEvent onDamaged;
 
+    public BuffComponentEnemy buffs;
+
     public void Init(EnemyData data_, float health_, Vector3 pos_)
     {
         EnemyManager.enemyCount++;
@@ -38,6 +40,8 @@ public class Enemy : MonoBehaviour
         obj.transform.position = pos_;
         obj.name = data.name;
         obj.GetComponentInChildren<Renderer>().material.color = data.enemyColor;
+
+        buffs = this.gameObject.GetComponent<BuffComponentEnemy>();
 
         StartCoroutine(movementTest());
     }
@@ -61,6 +65,8 @@ public class Enemy : MonoBehaviour
             critCount++;
             damageInfo.wasCritical = true;
 		}
+
+        modifiedDamage = buffs.ModifyDamage(modifiedDamage);
 
         builder.Append(modifiedDamage.ToString());
         for(int i = 0; i < critCount; i++)
@@ -101,7 +107,7 @@ public class Enemy : MonoBehaviour
             }
 
 
-            obj.transform.position = Vector3.MoveTowards(obj.transform.position, target.position, BASESPEED * Time.deltaTime);
+            obj.transform.position = Vector3.MoveTowards(obj.transform.position, target.position, buffs.ModifySpeed(BASESPEED) * Time.deltaTime);
 
             // LevelManager.path.Count < curNode
 

@@ -85,7 +85,7 @@ public class Tower : MonoBehaviour
     private bool canAcquireSameTarget; // If tower can fire at multiple targets, is tower able to fire at the same target?
     public DamageInfo lastDamageInfo; // This is alwa
 
-    public BuffComponent buffs;
+    public BuffComponentTower buffs;
 
     public TowerData Data { get; private set; }
 
@@ -110,7 +110,7 @@ public class Tower : MonoBehaviour
         tile = tile_;
         tile.tower = this;
 
-        buffs = this.gameObject.GetComponent<BuffComponent>();
+        buffs = this.gameObject.GetComponent<BuffComponentTower>();
 
         this.gameObject.transform.position = tile.gameObject.transform.position;
 
@@ -225,25 +225,6 @@ public class Tower : MonoBehaviour
 	{
 		while (true)
 		{
-            // Check if we need a new target (we have no target, or current target not in range)
-
-            /*
-            if (target == null || !withinRange(target.transform))
-            {
-                //print("Looking for new target..");
-                // Tower has no target, let's search for a potential target in range
-                foreach (GameObject enemy in EnemyManager.enemies)
-                {
-                    if (enemy != null && withinRange(enemy.transform))
-                    {
-                        //print("Found one!");
-                        // Found a valid target
-                        target = enemy.GetComponent<Enemy>();
-                        break;
-                    }
-                }
-            }*/
-
             CheckTargets();
 
             // Attempt attack on all targets in list
@@ -265,18 +246,7 @@ public class Tower : MonoBehaviour
                 continue;
 			}
 
-            // Check if we have a target
-            /*
-            if (target != null)
-            {
-                //print("Firing at current target!");
-                fire();
-                yield return new WaitForSeconds(atkSpeed);
-                continue;
-            }*/
-
             // No valid targets within range, let's hibernate for 0.1s
-            //print("No targets. Hibernating..");
             yield return new WaitForSeconds(0.1f);
         }
 	}

@@ -30,6 +30,6 @@ public class OnCrit_TowerSelfBuff : ScriptableAction
 
 	public override string GenerateTooltip()
 	{
-		return "Upon crit, tower gains <b>+" + Mathf.Round((1 - (1 * teslaBuff.Stats.spdPercentMod)) * 1000) / 1000f + "%</b> attack speed permanently.";
+		return "Upon crit, tower gains <b>+" + Mathf.Round((1 - (1 * teslaBuff.TowerStats.spdPercentMod)) * 1000) / 1000f + "%</b> attack speed permanently.";
 	}
 }

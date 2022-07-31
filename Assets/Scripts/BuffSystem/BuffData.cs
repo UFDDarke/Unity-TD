@@ -25,9 +25,16 @@ public class BuffData : ScriptableObject
 
 	[Header("Stat Modifiers")]
 	[SerializeField]
-	private Stats stats;
+	[Tooltip("If this buff is applied to a tower, it will gain the listed benefits or maluses.")]
+	private TowerStats towerStats;
+	public TowerStats TowerStats { get => towerStats; private set => towerStats = value; }
 
-	public Stats Stats { get => stats; private set => stats = value; }
+
+	[SerializeField]
+	[Tooltip("If this buff is applied to an enemy, it will gain the listed benefits or maluses.")]
+	private EnemyStats enemyStats;
+	public EnemyStats EnemyStats { get => enemyStats; private set => enemyStats = value; }
+
 	public bool PermanentBuff
 	{
 		get { return permanentBuff; }
@@ -39,20 +46,10 @@ public class BuffData : ScriptableObject
 		get { return maxDuration; }
 		private set { maxDuration = value; }
 	}
-
-	public void ApplyBuff()
-	{
-
-	}
-
-	public virtual void RemoveBuff()
-	{
-
-	}
 }
 
 [System.Serializable]
-public class Stats
+public class TowerStats
 {
 	public float spdPercentMod = 0f;
 
@@ -72,6 +69,16 @@ public class Stats
 	public float projSpdPercentMod = 0f;
 
 	public int maxTargetsFlatMod = 0;
+}
+
+[System.Serializable]
+public class EnemyStats
+{
+	public float dmgTakenFlatMod = 0f;
+	public float dmgTakenPercentMod = 0f;
+
+	public float moveSpeedFlatMod = 0f;
+	public float moveSpeedPercentMod = 0f;
 }
 
 public enum StackBehavior
