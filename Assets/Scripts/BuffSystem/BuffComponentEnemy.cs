@@ -12,6 +12,7 @@ public class BuffComponentEnemy : BuffComponent
 		private set { buffs = value; }
 		get { return buffs; }
 	}
+	private Enemy enemy;
 
 	public override void ApplyBuff(BuffData data)
 	{
@@ -38,8 +39,23 @@ public class BuffComponentEnemy : BuffComponent
 				break;
 
 		}
-	}
 
+		foreach (BaseAttribute attributeBonus in buffInstance.modifiers)
+		{
+			switch (attributeBonus.attributeType)
+			{
+				case AttributeType.DamageTaken:
+					AddBonus(enemy.damageTakenModifier, attributeBonus);
+					break;
+				case AttributeType.MoveSpeed:
+					AddBonus(enemy.moveSpeed, attributeBonus);
+					break;
+				default:
+					Debug.LogWarning("Failed to apply attribute bonus of type: " + attributeBonus.attributeType.ToString() + " to tower.");
+					break;
+			}
+		}
+	}
 
 	public override void RemoveBuff(Buff expiredBuff)
 	{
@@ -55,7 +71,23 @@ public class BuffComponentEnemy : BuffComponent
 		}
 	}
 
+	private void Update()
+	{
+		Tick();
+	}
+
+	private void Start()
+	{
+		enemy = GetComponentInParent<Enemy>();
+		if (!enemy) Debug.LogError("BuffComponentEnemy couldn't find an Enemy component.");
+	}
+
+
 	// TODO: Process enemy buff data
+
+	// EDIT: thanks Jordan, I will keep this as a monument of shame for a while until I decide to remove it
+
+	/*
 	public float ModifyDamage(float baseDamage)
 	{
 		float modifiedDamage = baseDamage;
@@ -95,5 +127,5 @@ public class BuffComponentEnemy : BuffComponent
 		}
 
 		return Mathf.Max(0.1f, modifiedSpeed);
-	}
+	}*/
 }

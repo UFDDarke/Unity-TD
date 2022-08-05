@@ -12,7 +12,7 @@ public class OnAttack_NewRandomTarget : ScriptableAction
 		if (!tower) return;
 
 		// TODO: Innately incompatible with multiple targets. Need proper implementation for >1 target
-		List<Enemy> withinRange = EnemyManager.GetEnemiesInRange(tower.transform.position, tower.Range);
+		List<Enemy> withinRange = EnemyManager.GetEnemiesInRange(tower.transform.position, tower.Range.getFinalValue());
 		if (withinRange == null) return;
 
 		Enemy newTarget = withinRange[(int)Random.Range(0, withinRange.Count)];

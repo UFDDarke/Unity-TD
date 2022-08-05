@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e48beb9a5a8615c48951e5946719397e, type: 3}
   m_Name: Tesla_PowerSurgeBuff
   m_EditorClassIdentifier: 
-  permanentBuff: 0
+  permanentBuff: 1
   maxDuration: 10
   behavior: 1
   maxStacks: 512
   isBuffHarmful: 0
-  stats:
-    spdPercentMod: 0.995
-    atkFlatMod: 0
-    atkPercentMod: 1.01
-    rangeFlatMod: 0
-    rangePercentMod: 0
-    critChaFlatMod: 0
-    critChaPercentMod: 0
-    critDamFlatMod: 0
-    critDamPercentMod: 0
-    projSpdFlatMod: 0
-    projSpdPercentMod: 0
-    maxTargetsFlatMod: 0
+  modifiers:
+  - bonusGranted: 1
+    priority: 0
+    flatValue: 0
+    multiplier: -0.01
+  - bonusGranted: 4
+    priority: 0
+    flatValue: 0.001
+    multiplier: 0
+  - bonusGranted: 3
+    priority: 0
+    flatValue: 0
+    multiplier: 0.1

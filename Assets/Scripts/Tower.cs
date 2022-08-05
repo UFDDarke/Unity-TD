@@ -13,8 +13,8 @@ public class Tower : MonoBehaviour
     public GameObject obj; // GameObject that Tower.cs is attached to
     public GameObject prefab; // Which projectile prefab the tower will use
     protected TileScript tile; // The tile that this tower currently resides on
-    public Vector3 projectileOffset; // UNUSED; to be used to determine a projectile's starting point
 
+    /*
     [SerializeField]
     private float damage;
     [SerializeField]
@@ -26,64 +26,78 @@ public class Tower : MonoBehaviour
     [SerializeField]
     private float criticalChance;
     [SerializeField]
-    private float criticalDamage;
+    private float criticalDamage;*/
+
+    [SerializeField]
+    private Attribute damage;
+    [SerializeField]
+    private Attribute range;
+    [SerializeField]
+    private Attribute atkSpeed;
+    [SerializeField]
+    private Attribute projectileSpeed;
+    [SerializeField]
+    private Attribute criticalChance;
+    [SerializeField]
+    private Attribute criticalDamage;
+
+
 
     [Header("Misc")]
     [SerializeField] private AttackEvent onAttack;
 
-    public float Damage
+    public Attribute Damage
 	{
         get
 		{
-            return buffs.processDamage(damage);
+            return damage;
 		}
 	}
 
-    public float Range
+    public Attribute Range
     {
         get
         {
-            return buffs.processRange(range);
+            return range;
         }
     }
 
-    public float AtkSpeed
+    public Attribute AtkSpeed
 	{
         get
 		{
-            return buffs.processSpeed(atkSpeed);
-		}
+            return atkSpeed;
+        }
 	}
 
-    public float CriticalChance
+    public Attribute CriticalChance
 	{
         get
 		{
-            return buffs.processCritChance(criticalChance);
-		}
+            return criticalChance;
+        }
 	}
 
-    public float CriticalDamage
+    public Attribute CriticalDamage
     {
         get
         {
-            return buffs.processCritDamage(criticalDamage);
+            return criticalDamage;
         }
     }
 
-    public float ProjectileSpeed
+    public Attribute ProjectileSpeed
 	{
         get
 		{
-            return buffs.processProjSpeed(projectileSpeed);
-		}
+            return projectileSpeed;
+        }
 	}
 
-    [SerializeField]
-    // TODO: Automatically adjust size of target array if maxNumberTargets changes
+    // TODO: Automatically adjust size of target array if maxNumberTargets changes, maybe use properties to make a new array
     private int maxNumberTargets; // How many targets can this tower fire at per attack?
     private bool canAcquireSameTarget; // If tower can fire at multiple targets, is tower able to fire at the same target?
-    public DamageInfo lastDamageInfo; // This is alwa
+    public DamageInfo lastDamageInfo; // This is used during damage events so scripts can get the parameters of the last damage event
 
     public BuffComponentTower buffs;
 
@@ -95,16 +109,27 @@ public class Tower : MonoBehaviour
         Data = data_;
         //print("Tower initialized!");
 
+        /*
         damage = Data.damage;
         range = Data.range;
         atkSpeed = Data.atkSpeed;
         projectileSpeed = Data.projectileSpeed;
-        projectileOffset = Data.projectileOffset;
+        criticalChance = Data.criticalChance;
+        criticalDamage = Data.criticalDamage;
+        */
+
+        damage = new Attribute(Data.damage);
+        range = new Attribute(Data.range);
+        atkSpeed = new AdditiveAttribute(Data.atkSpeed);
+        projectileSpeed = new Attribute(Data.projectileSpeed);
+        criticalChance = new Attribute(Data.criticalChance);
+        criticalDamage = new Attribute(Data.criticalDamage);
+
+
         maxNumberTargets = Data.maxTargets;
         canAcquireSameTarget = Data.canHitSameTarget;
         targets = new Enemy[maxNumberTargets];
-        criticalChance = Data.criticalChance;
-        criticalDamage = Data.criticalDamage;
+
        
 
         tile = tile_;
@@ -120,7 +145,7 @@ public class Tower : MonoBehaviour
     public bool withinRange(Transform point)
 	{
         // Temporarily adding 0.1f range for some wiggle room.
-        return getDistance(point.transform) < Range + 0.05f;
+        return getDistance(point.transform) < Range.getFinalValue() + 0.05f;
 	}
 
     public float getDistance(Transform point)
@@ -200,7 +225,8 @@ public class Tower : MonoBehaviour
             switch(canAcquireSameTarget)
 			{
                 case true:
-                    if(enemy != null && withinRange(enemy.transform))
+                    // TODO: Change targetting logic, so that the tower only targets the same enemy as a last resort
+                    if (enemy != null && withinRange(enemy.transform))
 					{
                         // Target acquired!
                         targets[index] = enemy.GetComponent<Enemy>();
@@ -242,7 +268,7 @@ public class Tower : MonoBehaviour
 
             if(attackSuccess)
 			{
-                yield return new WaitForSeconds(AtkSpeed);
+                yield return new WaitForSeconds(AtkSpeed.getFinalValue());
                 continue;
 			}
 

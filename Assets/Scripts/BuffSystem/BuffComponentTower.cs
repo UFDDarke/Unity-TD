@@ -13,6 +13,8 @@ public class BuffComponentTower : BuffComponent
 		get { return buffs; }
 	}
 
+	private Tower tower;
+
 	public override void ApplyBuff(BuffData data)
 	{
 		Buff buffInstance = new Buff(data, this);
@@ -38,8 +40,44 @@ public class BuffComponentTower : BuffComponent
 				break;
 
 		}
-	}
 
+
+		foreach(BaseAttribute attributeBonus in buffInstance.modifiers)
+		{
+			switch(attributeBonus.attributeType)
+			{
+				case AttributeType.AttackSpeed:
+					AddBonus(tower.AtkSpeed, attributeBonus);
+					break;
+
+				case AttributeType.Damage:
+					AddBonus(tower.Damage, attributeBonus);
+					break;
+
+				case AttributeType.Range:
+					AddBonus(tower.Range, attributeBonus);
+					break;
+
+				case AttributeType.ProjectileSpeed:
+					AddBonus(tower.ProjectileSpeed, attributeBonus);
+					break;
+
+				case AttributeType.CriticalChance:
+					AddBonus(tower.CriticalChance, attributeBonus);
+					break;
+
+				case AttributeType.CriticalDamage:
+					AddBonus(tower.CriticalDamage, attributeBonus);
+					break;
+				default:
+					Debug.LogWarning("Failed to apply attribute bonus of type: " + attributeBonus.attributeType.ToString() + " to tower.");
+					break;
+			}
+		}
+
+
+
+	}
 	public override void RemoveBuff(Buff expiredBuff)
 	{
 		// NYI
@@ -61,9 +99,20 @@ public class BuffComponentTower : BuffComponent
 		Tick();
 	}
 
+	private void Start()
+	{
+		tower = GetComponentInParent<Tower>();
+		if (!tower) Debug.LogError("BuffComponentTower couldn't find a Tower component.");
+	}
+
 	// MESSY MESSY
 	// i have no clue where to even begin with this kind of tomfoolery, so i guess i will just do it messy until i figure out a proper method?
 	// TODO: consult with the elder god Dillon, or perhaps Jordan
+
+	// EDIT: thanks Jordan, I will keep this as a monument of shame for a while until I decide to remove it
+
+	/*
+
 	public float processDamage(float baseDamage)
 	{
 		float modifiedDamage = baseDamage;
@@ -177,5 +226,5 @@ public class BuffComponentTower : BuffComponent
 		}
 
 		return modifiedProjSpeed;
-	}
+	}*/
 }

@@ -15,9 +15,10 @@ public class Enemy : MonoBehaviour
     public float health;
     public float healthMax;
     public GameObject obj; // The GameObject that Enemy.cs is attached to
-    private static float BASESPEED = 1.0f;
     private int curNode = 0;
     private HealthBar healthBar;
+    public Attribute damageTakenModifier;
+    public Attribute moveSpeed;
     [SerializeField] private DamageEvent onDamaged;
 
     public BuffComponentEnemy buffs;
@@ -34,6 +35,9 @@ public class Enemy : MonoBehaviour
 
         healthBar = this.gameObject.GetComponentInChildren<HealthBar>();
         healthBar.Initialize(this);
+
+        damageTakenModifier = new Attribute(0f);
+        moveSpeed = new Attribute(data.speed);
 
 
         obj = this.gameObject;
@@ -57,16 +61,19 @@ public class Enemy : MonoBehaviour
         StringBuilder builder = new StringBuilder();
         int critCount = 0;
 
+
+        modifiedDamage = damageTakenModifier.processValue(modifiedDamage);
+
+
         // Check for a critical strike TODO: Multicrit support
-        if (Random.Range(0f, 1f) < owner.CriticalChance)
+        if (Random.Range(0f, 1f) < owner.CriticalChance.getFinalValue())
 		{
             // Critical strike!
-            modifiedDamage *= (1 + (owner.CriticalDamage));
+            modifiedDamage *= (1 + (owner.CriticalDamage.getFinalValue()));
             critCount++;
             damageInfo.wasCritical = true;
 		}
 
-        modifiedDamage = buffs.ModifyDamage(modifiedDamage);
 
         builder.Append(modifiedDamage.ToString());
         for(int i = 0; i < critCount; i++)
@@ -75,6 +82,7 @@ public class Enemy : MonoBehaviour
             builder.Append("!");
 		}
 
+        // TODO: Instead of creating damage text directly, have the DamageText listen for a damage event
         DamageText.CreateFloatingText(builder.ToString(), gameObject.transform.position);
         health -= modifiedDamage;
         healthBar.UpdateValues();
@@ -106,15 +114,12 @@ public class Enemy : MonoBehaviour
                 target = LevelManager.path[curNode].transform;
             }
 
-
-            obj.transform.position = Vector3.MoveTowards(obj.transform.position, target.position, buffs.ModifySpeed(BASESPEED) * Time.deltaTime);
-
-            // LevelManager.path.Count < curNode
+            obj.transform.position = Vector3.MoveTowards(obj.transform.position, target.position, Mathf.Max(moveSpeed.getFinalValue(), 0.35f) * Time.deltaTime);
 
             yield return null;
         }
 
-        //print("we out here");
+        // Reached exit goal
         Cleanup();
 
         yield return new WaitForSeconds(3f);

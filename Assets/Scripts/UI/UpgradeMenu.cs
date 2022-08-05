@@ -80,7 +80,7 @@ public class UpgradeMenu : MonoBehaviour
 		{
 			Tower tower = clickedTile.tower;
 			towerName.text = tower.Data.name.ToString();
-			damageText.text = tower.Damage.ToString();
+			damageText.text = tower.Damage.getFinalValue().ToString();
 
 			if(tower.Data.maxTargets > 1)
 			{
@@ -94,16 +94,16 @@ public class UpgradeMenu : MonoBehaviour
 			}
 
 
-			attackSpeedText.text = tower.AtkSpeed.ToString();
-			rangeText.text = tower.Range.ToString();
-			rangeIndicator.transform.localScale = new Vector2(2 * tower.Range, 2 * tower.Range);
+			attackSpeedText.text = tower.AtkSpeed.getFinalValue().ToString();
+			rangeText.text = tower.Range.getFinalValue().ToString();
+			rangeIndicator.transform.localScale = new Vector2(2 * tower.Range.getFinalValue(), 2 * tower.Range.getFinalValue());
 
 			StringBuilder builder = new StringBuilder();
 			bool needNewline = false;
 
 			if(tower.Data.criticalChance > 0 && tower.Data.criticalDamage > 0)
 			{
-				builder.Append("<b>" + (tower.CriticalChance * 100).ToString() + "%</b> chance for <b>+" + (tower.CriticalDamage * 100).ToString() + "</b>% extra damage.");
+				builder.Append("<b>" + (tower.CriticalChance.getFinalValue() * 100).ToString() + "%</b> chance for <b>+" + (tower.CriticalDamage.getFinalValue() * 100).ToString() + "</b>% extra damage.");
 				needNewline = true;
 			}
 
