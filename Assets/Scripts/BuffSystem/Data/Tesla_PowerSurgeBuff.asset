@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e48beb9a5a8615c48951e5946719397e, type: 3}
-  m_Name: Flamespewer_Vulnerability
+  m_Name: Tesla_PowerSurgeBuff
   m_EditorClassIdentifier: 
   permanentBuff: 0
-  maxDuration: 5
+  maxDuration: 10
   behavior: 1
-  maxStacks: 0
-  isBuffHarmful: 1
-  modifiers: []
+  maxStacks: 512
+  isBuffHarmful: 0
+  modifiers:
+  - bonusGranted: 1
+    priority: 0
+    flatValue: 0.02
+    multiplier: 0

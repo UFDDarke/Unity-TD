@@ -103,7 +103,10 @@ public class UpgradeMenu : MonoBehaviour
 
 			if(tower.Data.criticalChance > 0 && tower.Data.criticalDamage > 0)
 			{
-				builder.Append("<b>" + (tower.CriticalChance.getFinalValue() * 100).ToString() + "%</b> chance for <b>+" + (tower.CriticalDamage.getFinalValue() * 100).ToString() + "</b>% extra damage.");
+				//builder.Append("<b>" + (tower.CriticalChance.getFinalValue() * 100).ToString() + "%</b> chance for <b>+" + (tower.CriticalDamage.getFinalValue() * 100).ToString() + "</b>% extra damage.");
+				builder.Append("Critical Chance: <b>" + (tower.CriticalChance.getFinalValue() * 100).ToString() + "%</b>");
+				builder.AppendLine();
+				builder.Append("Critical Damage: <b>" + (tower.CriticalDamage.getFinalValue() * 100 + 100).ToString() + "%</b>");
 				needNewline = true;
 			}
 

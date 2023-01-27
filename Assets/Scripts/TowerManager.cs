@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class TowerManager
 {
-	public static List<GameObject> towers = new List<GameObject>();
+	public static List<Tower> towers = new List<Tower>();
 	public static Object[] types;
 
 	public static Tower CreateTower(TileScript tile, GameObject prefab, TowerData data)
@@ -14,13 +14,30 @@ public static class TowerManager
 
 		//createdObj.transform.position = position;
 
-		towers.Add(createdObj);
+		towers.Add(createdTower);
 
 		createdTower.initialize(data, tile);
 
 		return createdTower;
 
 	}
+
+	public static List<Tower> GetTowersInRange(Vector2 pos, float radius)
+	{
+		List<Tower> towersInRange = new List<Tower>();
+
+		foreach(Tower tower in towers)
+		{
+			if (tower.getDistance(pos) <= radius) towersInRange.Add(tower);
+		}
+
+		return towersInRange;
+	}
+
+
+
+
+
 
 	// Alternative to Start() and Awake() for static classes
 	static TowerManager()

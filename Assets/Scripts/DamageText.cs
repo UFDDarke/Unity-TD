@@ -12,12 +12,12 @@ public static class DamageText
 		prefab = Resources.Load("Prefabs/Text Holder") as GameObject;
 	}
 
-	public static void CreateFloatingText(string dmgText, Vector2 pos)
+	public static void CreateFloatingText(string dmgText, Vector3 pos)
 	{
 		GameObject newText = Object.Instantiate(prefab);
 		TextMeshPro text = newText.GetComponentInChildren<TextMeshPro>();
 		text.SetText(dmgText);
-		newText.transform.position = pos;
+		newText.transform.position = pos + (new Vector3(0, 0, -1));
 	}
 
 }

@@ -13,7 +13,11 @@ public class EnemyData : ScriptableObject
 
 	public float healthModifier = 1;
 	public float speed = 1.0f;
-	
+
+	[Min(0)]
+	public int minimumWave = 0;
+
+
 	public SizeClass sizeClass = SizeClass.Normal;
 	public Color enemyColor = Color.red;
 

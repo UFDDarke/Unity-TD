@@ -142,15 +142,15 @@ public class Tower : MonoBehaviour
         StartCoroutine(TowerLoop());
 	}
 
-    public bool withinRange(Transform point)
+    public bool withinRange(Vector2 point)
 	{
         // Temporarily adding 0.1f range for some wiggle room.
-        return getDistance(point.transform) < Range.getFinalValue() + 0.05f;
+        return getDistance(point) < Range.getFinalValue() + 0.05f;
 	}
 
-    public float getDistance(Transform point)
+    public float getDistance(Vector2 point)
 	{
-        return Vector2.Distance(this.gameObject.transform.position, point.gameObject.transform.position);
+        return Vector2.Distance(this.gameObject.transform.position, point);
 	}
 
     public void fire(Enemy target_) // Can override to fire at a specific target.
@@ -168,7 +168,7 @@ public class Tower : MonoBehaviour
 
     public void sellTower()
 	{
-        TowerManager.towers.Remove(this.gameObject);
+        TowerManager.towers.Remove(this);
         tile.tower = null;
         Destroy(this.gameObject);
 	}
@@ -179,7 +179,7 @@ public class Tower : MonoBehaviour
 
         for(int i = 0; i < maxNumberTargets; i++)
 		{
-            if (targets[i] == null || !withinRange(targets[i].transform)) {
+            if (targets[i] == null || !withinRange(targets[i].transform.position)) {
                 //Debug.Log("Acquiring new target for index " + i);
                 AcquireNewTarget(i);
 			}
@@ -226,7 +226,7 @@ public class Tower : MonoBehaviour
 			{
                 case true:
                     // TODO: Change targetting logic, so that the tower only targets the same enemy as a last resort
-                    if (enemy != null && withinRange(enemy.transform))
+                    if (enemy != null && withinRange(enemy.transform.position))
 					{
                         // Target acquired!
                         targets[index] = enemy.GetComponent<Enemy>();
@@ -234,7 +234,7 @@ public class Tower : MonoBehaviour
 					}
                     break;
                 case false:
-                    if(enemy != null && withinRange(enemy.transform) && !targets.Contains(enemy.GetComponent<Enemy>()))
+                    if(enemy != null && withinRange(enemy.transform.position) && !targets.Contains(enemy.GetComponent<Enemy>()))
 					{
                         // Target acquired!
                         targets[index] = enemy.GetComponent<Enemy>();
