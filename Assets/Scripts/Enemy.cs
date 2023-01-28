@@ -50,7 +50,12 @@ public class Enemy : MonoBehaviour
         StartCoroutine(movementTest());
     }
 
-    public void takeDamage(float damage, Tower owner)
+	public void Update()
+	{
+        healthBar.UpdateValues();
+	}
+
+	public void takeDamage(float damage, Tower owner)
 	{
         DamageInfo damageInfo = new DamageInfo();
         damageInfo.attacker = owner;
